@@ -47,6 +47,7 @@ jobs:
           echo $(pwd)
           cp ./plugin/bin/golangci-lint-cerrl.so /tmp/golangci-lint-cerrl.so
           test -e /home/runner/work/go-lint-cerrl/go-lint-cerrl/plugin/bin/golangci-lint-cerrl.so && echo file exists || echo file not found 
+          make build-plugin
       - name: golangci-lint
         uses: golangci/golangci-lint-action@v3
         with:
