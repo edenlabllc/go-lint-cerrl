@@ -60,6 +60,11 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v2
+        name: checkout code
+      - name: Copy plugin
+        run: |
+          echo $(go env)
+          test -e /home/runner/work/go-lint-cerrl/go-lint-cerrl/plugin/bin/golangci-lint-cerrl.so && echo file exists || echo file not found 
       - name: golangci-lint
         uses: golangci/golangci-lint-action@v2
         with:
