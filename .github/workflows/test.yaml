@@ -45,7 +45,9 @@ jobs:
       - name: Copy plugin
         shell: bash
         run: |
+          go vet -vettool=$(which cerrl) ./...
           VET_RESULT=$(go vet -vettool=$(which cerrl) ./...)
+          echo VET_RESULT
           if [[ $VET_RESULT != "" ]]; then
             echo "go vet found some issues: $VET_RESULT"
             exit 1
