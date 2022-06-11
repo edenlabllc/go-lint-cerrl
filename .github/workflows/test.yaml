@@ -36,6 +36,10 @@ jobs:
         platform: [ubuntu-latest]
     runs-on: ${{ matrix.platform }}
     steps:
+      - name: Install Go
+        uses: actions/setup-go@v3
+        with:
+          go-version: ${{ matrix.go-version }}
       - name: Checkout code
         uses: actions/checkout@v3
       - name: Copy plugin
