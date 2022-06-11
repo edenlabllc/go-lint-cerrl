@@ -15,12 +15,12 @@ jobs:
     runs-on: ${{ matrix.platform }}
     steps:
       - name: Install Go
-        uses: actions/setup-go@v3
+        uses: actions/setup-go@v2
         with:
           go-version: ${{ matrix.go-version }}
       - name: Checkout code
-        uses: actions/checkout@v3
-      - uses: actions/cache@v3
+        uses: actions/checkout@v2
+      - uses: actions/cache@v2
         with:
           path: ~/go/pkg/mod
           key: ${{ runner.os }}-go-${{ hashFiles('**/go.sum') }}
@@ -29,38 +29,18 @@ jobs:
       - name: Test
         run: |
           go test ./...
-  lint:
+  golangci:
     strategy:
       matrix:
         go-version: [1.18.x]
-        platform: [macos-latest]
-    runs-on: ${{ matrix.platform }}
+        platform: [ubuntu-latest]
+    name: lint
+    runs-on: ${{ matrix.os }}
     steps:
-      - name: Install Go
-        uses: actions/setup-go@v3
+      - uses: actions/checkout@v2
+        name: checkout code
+      - name: golangci-lint
+        uses: golangci/golangci-lint-action@v2
         with:
-          go-version: ${{ matrix.go-version }}
-      - name: Checkout code
-        uses: actions/checkout@v3
-      - name: Copy plugin
-        shell: bash
-        run: |
-          go vet -vettool=cerrl ./...
-#          go install github.com/golangci/golangci-lint/cmd/golangci-lint@v1.45.0
-#          go version -m $(which golangci-lint)
-#          make lint
-#  golangci:
-#    strategy:
-#      matrix:
-#        go: [1.18]
-#        os: [ubuntu-latest]
-#    name: lint
-#    runs-on: ${{ matrix.os }}
-#    steps:
-#      - uses: actions/checkout@v2
-#        name: checkout code
-#      - name: golangci-lint
-#        uses: golangci/golangci-lint-action@v2
-#        with:
-#          version: v1.45.0
-#          args: --config ./.golangci.git.yml
+          version: v1.45.0
+          args: --config ./.golangci.git.yml
