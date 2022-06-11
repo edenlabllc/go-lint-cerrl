@@ -39,8 +39,11 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         name: checkout code
+      - name: plugin
+        run: |
+          make build-plugin
       - name: golangci-lint
         uses: golangci/golangci-lint-action@v2
         with:
           version: v1.45.0
-          args: --config ./.golangci.git.yml
+          args: --config ./.golangci.yml
