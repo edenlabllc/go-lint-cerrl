@@ -38,6 +38,10 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+      - name: Copy plugin
+        run: |
+          echo $(pwd)
+          cp ./plugin/bin/golangci-lint-cerrl.so /tmp/golangci-lint-cerrl.so
       - name: golangci-lint
         uses: golangci/golangci-lint-action@v3
         with:
