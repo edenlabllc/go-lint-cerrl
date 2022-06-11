@@ -42,44 +42,18 @@ jobs:
           go-version: ${{ matrix.go-version }}
       - name: Checkout code
         uses: actions/checkout@v3
-      - name: Copy plugin
-        shell: bash
-        run: |
-          go vet -vettool=cerrl ./...
-          VET_RESULT=$(go vet -vettool=cerrl ./...)
-          echo ${VET_RESULT}
-          if [[ ${VET_RESULT} != "" ]]; then
-            echo "go vet found some issues: ${VET_RESULT}"
-            exit 1
-          fi
-#          go install github.com/golangci/golangci-lint/cmd/golangci-lint@v1.45.0
-#          go version -m $(which golangci-lint)
-#          make lint
-#  golangci:
-#    strategy:
-#      matrix:
-#        go: [1.18]
-#        os: [macos-latest]
-#    name: lint
-#    runs-on: ${{ matrix.os }}
-#    steps:
-#      - uses: actions/checkout@v2
-#        name: checkout code
-#      - name: Copy plugin
-#        run: |
-#          echo $(go env)
-#          test -e /Users/runner/work/go-lint-cerrl/go-lint-cerrl/plugin/bin/golangci-lint-cerrl.so && echo file exists || echo file not found 
-#      - name: golangci-lint
-#        uses: golangci/golangci-lint-action@v2
-#        with:
-#          # Required: the version of golangci-lint is required and must be specified without patch version: we always use the latest patch version.
-#          version: v1.45.0
-#          # Optional: working directory, useful for monorepos
-#          # working-directory: somedir
-#
-#          # Optional: golangci-lint command line arguments.
-#          args: --disable cerrl -v
-#
-#          # Optional: show only new issues if it's a pull request. The default value is `false`.
-#          # only-new-issues: true
-
+  golangci:
+    strategy:
+      matrix:
+        go: [1.18]
+        os: [ubuntu-latest]
+    name: lint
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v2
+        name: checkout code
+      - name: golangci-lint
+        uses: golangci/golangci-lint-action@v2
+        with:
+          version: v1.45.0
+          args: --config ./.golangci.git.yml
