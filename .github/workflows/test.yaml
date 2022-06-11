@@ -42,11 +42,11 @@ jobs:
           go-version: ${{ matrix.go-version }}
       - name: Checkout code
         uses: actions/checkout@v3
-      - name: Copy plugin
-        run: |
-          echo $(go env)
-          make build-plugin-git
-          test -e /home/runner/work/go-lint-cerrl/go-lint-cerrl/plugin/bin/golangci-lint-cerrl.so && echo file exists || echo file not found 
+#      - name: Copy plugin
+#        run: |
+#          echo $(go env)
+#          make build-plugin-git
+#          test -e /home/runner/work/go-lint-cerrl/go-lint-cerrl/plugin/bin/golangci-lint-cerrl.so && echo file exists || echo file not found 
       - name: golangci-lint
         uses: golangci/golangci-lint-action@v3
         with:
