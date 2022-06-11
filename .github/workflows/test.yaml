@@ -45,11 +45,11 @@ jobs:
       - name: Copy plugin
         shell: bash
         run: |
-          go vet -vettool=$(which cerrl) ./...
-          VET_RESULT=$(go vet -vettool=$(which cerrl) ./...)
-          echo VET_RESULT
-          if [[ $VET_RESULT != "" ]]; then
-            echo "go vet found some issues: $VET_RESULT"
+          go vet -vettool=cerrl ./...
+          VET_RESULT=$(go vet -vettool=cerrl ./...)
+          echo ${VET_RESULT}
+          if [[ ${VET_RESULT} != "" ]]; then
+            echo "go vet found some issues: ${VET_RESULT}"
             exit 1
           fi
 #          go install github.com/golangci/golangci-lint/cmd/golangci-lint@v1.45.0
