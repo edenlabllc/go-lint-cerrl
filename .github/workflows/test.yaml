@@ -52,4 +52,5 @@ jobs:
         run: |
           go install github.com/golangci/golangci-lint/cmd/golangci-lint@v1.45.0
           go version -m $(which golangci-lint)
+          make build-plugin
           make lint
