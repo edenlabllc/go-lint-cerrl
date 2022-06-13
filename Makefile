@@ -1,9 +1,6 @@
 build-plugin:
 	go build --buildmode plugin plugin/cerrl.go
 
-build-plugin-git:
-	go build --buildmode plugin -o /home/runner/work/go-lint-cerrl/go-lint-cerrl/plugin/bin/golangci-lint-cerrl.so plugin/cerrl.go
-
 install:
 	go install ./cmd/...
 
