@@ -1,7 +1,7 @@
 linters-settings:
   custom:
     cerrl:
-      path: /app/cerrl.so
+      path: ./cerrl.so
       description: Checks that errors created by the cerror package are logged
   godot:
     # Comments to be checked: `declarations`, `toplevel`, or `all`.
