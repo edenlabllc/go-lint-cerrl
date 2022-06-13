@@ -18,6 +18,7 @@ type analyzerPlugin struct{}
 // GetAnalyzers implements the interface required for golangci-lint plugins
 func (*analyzerPlugin) GetAnalyzers() []*analysis.Analyzer {
 	cerror.New()
+
 	return []*analysis.Analyzer{
 		cerrl.Analyzer(),
 	}
