@@ -44,3 +44,6 @@ jobs:
         with:
           version: v1.45.0
           args: --config ./.golangci.git.yml
+      - name: Test
+        run: |
+          go version -m $(which golangci-lint)
