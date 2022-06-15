@@ -13,10 +13,10 @@ func useCerror() *cerror.CError {
 	cerror.New().WithPayload().LogError()
 	cerror.NewValidationError().WithPayload().Log()
 
-	_ = cerror.New()            // want "cerror.New... statement is not followed by a .Log call"
-	cerror.New()                // want "cerror.New... statement is not followed by a .Log call"
-	cerror.NewValidationError() // want "cerror.New... statement is not followed by a .Log call"
-	cerror.NewF().WithPayload() // want "cerror.New... statement is not followed by a .Log call"
+	_ = cerror.New()            // want "missing a .Log... call in chain after cerror.New..."
+	cerror.New()                // want "missing a .Log... call in chain after cerror.New..."
+	cerror.NewValidationError() // want "missing a .Log... call in chain after cerror.New..."
+	cerror.NewF().WithPayload() // want "missing a .Log... call in chain after cerror.New..."
 
-	return cerror.New() // want "cerror.New... statement is not followed by a .Log call"
+	return cerror.New() // want "missing a .Log... call in chain after cerror.New..."
 }

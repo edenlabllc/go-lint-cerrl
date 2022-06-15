@@ -7,5 +7,5 @@ import (
 
 func useAlias() {
 	cerr.New().Log()
-	cerr.New() // want "cerror.New... statement is not followed by a .Log call"
+	cerr.New() // want "missing a .Log... call in chain after cerror.New..."
 }

@@ -100,7 +100,7 @@ func run(pass *analysis.Pass) (interface{}, error) {
 		// inspect that the call expression ends with a .Log call
 		_, ok = isLogCall(ce)
 		if !ok {
-			pass.Reportf(node.Pos(), "cerror.New... statement is not followed by a .Log call")
+			pass.Reportf(node.Pos(), "missing a .Log... call in chain after cerror.New...")
 		}
 	})
 
