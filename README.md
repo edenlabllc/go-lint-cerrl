@@ -42,7 +42,7 @@ err := cerr.New(...).LogError()
 ...
 ```
 
-# Installation
+## Installation
 
 It's very important to remember that plugins programs that load them must
 be built with the same configuration (go version, os, arch, ...).
@@ -61,7 +61,7 @@ Before installation ensure that you have `CGO_ENABLED=1` locally:
 go env | grep CGO_ENABLED
 ```
 
-## Use as a golangci-lint plugin locally
+### Use as a golangci-lint plugin locally
 
 Clone or download the repo:
 
@@ -82,7 +82,7 @@ go build --buildmode plugin --output {custom dir path} plugin/cerrl.go
 Finally you'll get the `*.so` file that you can add to your `golangci-lint` config file.
 See the `.golangci.yml` configuration example with the plugin in our [repo](config/.golangci.yml#L2).
 
-##### Known issues
+#### Known issues
 
 If you see an error during `golangci-lint run` that looks similar too:
 
@@ -122,7 +122,7 @@ For example for `vscode` add the following lines to `settings.json`:
 And use them from cli as we did in our [repo](Makefile#L16).
 
 
-## Use as a golangci-lint plugin in docker
+### Use as a golangci-lint plugin in docker
 
 If you don't want to install the plugin locally and you don't need
 online linter issues discovering, you can run  `golangci-lint` inside
@@ -133,7 +133,7 @@ docker images. So we have to run the `golang` image and install `golangci-lint`
 and build the plugin inside the container. You can see an example of
 `docker-compose` file in our [repo](docker/docker-compose-lint.yaml)
 
-## Use in github workflows
+### Use in github workflows
 
 Unfortunately we can't use the original `golangci-lint` github [action](https://github.com/golangci/golangci-lint-action)
 because of [CGO_ENABLED=0](#installation). We have to install the plugin and `golangci-lint`
@@ -143,7 +143,7 @@ process or separate the linting into two jobs (as wee deed):
 - lint using config without plugins and use the original `golangci-lint` github action
 - lint using config with plugins only and use a custom action
 
-## Use as a standalone
+### Use as a standalone
 
 Rememeber that `nolint` directives won't work outside the `golangci-lint`.
 
