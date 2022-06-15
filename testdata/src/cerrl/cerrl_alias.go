@@ -1,7 +1,7 @@
 package cerrl
 
 import (
-	// the linter should work correctly even if import has alias
+	// the linter should work correctly even if imports have aliases
 	cerr "cerrl/pkg/cerror"
 )
 
