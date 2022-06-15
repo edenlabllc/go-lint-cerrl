@@ -1,0 +1,197 @@
+linters-settings:
+  custom:
+    cerrl:
+      path: ../cerrl.so
+      description: Checks that errors created by the cerror package are logged
+  godot:
+    # Comments to be checked: `declarations`, `toplevel`, or `all`.
+    # Default: declarations
+    scope: toplevel
+    # List of regexps for excluding particular comment lines from check.
+    exclude:
+      # Exclude todo and fixme comments.
+      - "^fixme:"
+      - "^todo:"
+    # Check that each sentence ends with a period.
+    # Default: true
+    period: false
+    # Check that each sentence starts with a capital letter.
+    # Default: false
+    capital: true
+  dupl:
+    threshold: 100
+  exhaustive:
+    default-signifies-exhaustive: false
+  funlen:
+    lines: 100
+    statements: 50
+  goconst:
+    min-len: 2
+    min-occurrences: 2
+  gocritic:
+    enabled-tags:
+      - diagnostic
+      - experimental
+      - opinionated
+      - performance
+      - style
+    disabled-checks:
+      - dupImport # https://github.com/go-critic/go-critic/issues/845
+      - ifElseChain
+      - octalLiteral
+      - whyNoLint
+      - wrapperFunc
+  gocyclo:
+    min-complexity: 15
+  goimports:
+    local-prefixes: github.com/golangci/golangci-lint
+  golint:
+    min-confidence: 0
+  gomnd:
+    settings:
+      mnd:
+        # don't include the "operation" and "assign"
+        checks:
+          - argument
+          - case
+          - condition
+          - return
+  govet:
+    check-shadowing: true
+  lll:
+    line-length: 140
+  maligned:
+    suggest-new: true
+  misspell:
+    locale: US
+  nolintlint:
+    allow-leading-space: true # don't require machine-readable nolint directives (i.e. with no leading space)
+    allow-unused: false # report any unused nolint directives
+    require-explanation: false # don't require an explanation for nolint directives
+    require-specific: false # don't require nolint directives to be specific about which linter is being skipped
+  wsl:
+    # See https://github.com/bombsimon/wsl/blob/master/doc/configuration.md for documentation of available settings.
+    # These are the defaults for `golangci-lint`.
+
+    # Controls if you may cuddle assignments and anything without needing an empty line between them.
+    # Default: false
+    allow-assign-and-anything: false
+
+    # Controls if you may cuddle assignments and calls without needing an empty line between them.
+    # Default: true
+    allow-assign-and-call: false
+
+    # Controls if you're allowed to cuddle multiple declarations.
+    # This is false by default to encourage you to group them in one var block.
+    # One major benefit with this is that if the variables are assigned the assignments will be tabulated.
+    # Default: false
+    allow-cuddle-declarations: false
+
+    # Controls if you may cuddle assignments even if they span over multiple lines.
+    # Default: true
+    allow-multiline-assign: false
+
+    # This option allows whitespace after each comment group that begins a block.
+    # Default: false
+    allow-separated-leading-comment: false
+
+    # Controls if blocks can end with comments.
+    # This is not encouraged sine it's usually code smell but might be useful do improve understanding or learning purposes.
+    # To be allowed there must be no whitespace between the comment and the last statement or the comment and the closing brace.
+    # Default: false
+    allow-trailing-comment: false
+
+    # Can be set to force trailing newlines at the end of case blocks to improve readability.
+    # If the number of lines (including comments) in a case block exceeds this number
+    # a linter error will be yielded if the case does not end with a newline.
+    # Default: 0
+    force-case-trailing-whitespace: 0
+
+    # Enforces that an `if` statement checking an error variable is cuddled
+    # with the line that assigned that error variable.
+    # Default: false
+    force-err-cuddling: false
+
+    # Enforces that an assignment which is actually a short declaration (using `:=`)
+    # is only allowed to cuddle with other short declarations, and not plain assignments, blocks, etc.
+    # This rule helps make declarations stand out by themselves, much the same as grouping var statement.
+    # Default: false
+    force-short-decl-cuddling: false
+
+    # Controls if the checks for slice append should be "strict"
+    # in the sense that it will only allow these assignments to be cuddled with variables being appended.
+    # Default: true
+    strict-append: false
+
+  nestif:
+    # Minimal complexity of if statements to report.
+    # Default: 5
+    min-complexity: 5
+linters:
+  # please, do not use `enable-all`: it's deprecated and will be removed soon.
+  # inverted configuration with `enable-all` and `disable` is not scalable during updates of golangci-lint
+  disable-all: true
+  enable:
+    - cerrl
+    - bodyclose
+    - deadcode
+    - depguard
+    - dogsled
+    - dupl
+    - errcheck
+    - funlen
+    - gochecknoinits
+    - goconst
+    - gocritic
+    - gocyclo
+    - gofmt
+    - goimports
+    - revive
+    - gomnd
+    - goprintffuncname
+    - gosec
+    - gosimple
+    - govet
+    - ineffassign
+    - lll
+    - misspell
+    - nakedret
+    - nolintlint
+    - rowserrcheck
+    - exportloopref
+    - staticcheck
+    - structcheck
+    - stylecheck
+    - typecheck
+    - unconvert
+    - unparam
+    - unused
+    - varcheck
+    - whitespace
+    - asciicheck
+    - exhaustive
+    - gocognit
+    - godot
+    - godox
+    - nestif
+    - noctx
+    - prealloc
+    - testpackage
+    - wsl
+
+issues:
+  # Excluding configuration per-path, per-linter, per-text and per-source
+  exclude-rules:
+    - path: _test\.go
+      linters:
+        - cerrl
+        - gomnd
+        - goconst
+        - funlen
+        - gocognit
+        - gocyclo
+
+    # https://github.com/go-critic/go-critic/issues/926
+    - linters:
+        - gocritic
+      text: "unnecessaryDefer:"

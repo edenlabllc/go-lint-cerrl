@@ -14,4 +14,10 @@ test:
 	go test -v ./...
 
 lint:
-	golangci-lint run -v
+	golangci-lint run -v -c config/.golangci.yml
+
+lint-no-plugin:
+	golangci-lint run -v -c config/.golangci-no-plugin.yml
+
+lint-plugin-only:
+	golangci-lint run -v -c config/.golangci-plugin-only.yml
