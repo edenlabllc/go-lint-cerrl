@@ -5,8 +5,6 @@
 go-lint-cerrl is a golang linter that helps finding unlogged errors
 created by the `cerror` package from your project.
 
-----
-
 ## Description
 
 There are number of cases when errors are created with a `cerror.New...` call
@@ -44,11 +42,7 @@ err := cerr.New(...).LogError()
 ...
 ```
 
-----
-
 # Installation
-
-----
 
 It's very important to remember that plugins programs that load them must
 be built with the same configuration (go version, os, arch, ...).
@@ -66,8 +60,6 @@ Before installation ensure that you have `CGO_ENABLED=1` locally:
 ```
 go env | grep CGO_ENABLED
 ```
-
-----
 
 ## Use as a golangci-lint plugin locally
 
@@ -141,8 +133,6 @@ docker images. So we have to run the `golang` image and install `golangci-lint`
 and build the plugin inside the container. You can see an example of
 `docker-compose` file in our [repo](docker/docker-compose-lint.yaml)
 
-----
-
 ## Use in github workflows
 
 Unfortunately we can't use the original `golangci-lint` github [action](https://github.com/golangci/golangci-lint-action)
@@ -152,8 +142,6 @@ action inside our [repo](.github/workflows/test.yaml#l51). You can use this appr
 process or separate the linting into two jobs (as wee deed):
 - lint using config without plugins and use the original `golangci-lint` github action
 - lint using config with plugins only and use a custom action
-
-----
 
 ## Use as a standalone
 
@@ -176,8 +164,6 @@ Also you can integrate the binary into `go vet`:
 ```
 go vet -vettool=$(which cerrl) ./...
 ```
-
-----
 
 ## Links
 
