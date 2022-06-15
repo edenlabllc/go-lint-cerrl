@@ -1,3 +1,4 @@
+// Package cerrl implements a go analyzer that catches not logged cerrors
 package cerrl
 
 import (
@@ -14,7 +15,7 @@ import (
 func Analyzer() *analysis.Analyzer {
 	return &analysis.Analyzer{
 		Name:     "cerrl",
-		Doc:      "Checks that 'cerror.New***' calls are followed by 'Log***' call",
+		Doc:      "Checks that 'cerror.New***' calls are followed by a 'Log***' call",
 		Run:      run,
 		Requires: []*analysis.Analyzer{inspect.Analyzer},
 	}
@@ -100,7 +101,7 @@ func run(pass *analysis.Pass) (interface{}, error) {
 		// inspect that the call expression ends with a .Log call
 		_, ok = isLogCall(ce)
 		if !ok {
-			pass.Reportf(node.Pos(), "cerror.New... statement is not followed by a .Log call")
+			pass.Reportf(node.Pos(), "missing a .Log... call in chain after cerror.New...")
 		}
 	})
 

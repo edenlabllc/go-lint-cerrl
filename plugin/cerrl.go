@@ -1,5 +1,5 @@
 // Serves as a golangci-lint compatible plugin
-// main package name is required by golangci-lint
+// https://golangci-lint.run/contributing/new-linters/#configure-a-plugin
 package main
 
 import (
@@ -14,7 +14,8 @@ var AnalyzerPlugin analyzerPlugin
 
 type analyzerPlugin struct{}
 
-// GetAnalyzers implements the interface required for golangci-lint plugins
+// GetAnalyzers returns a list of implemented analyzers.
+// Implements an interface required for golangci-lint plugins.
 func (*analyzerPlugin) GetAnalyzers() []*analysis.Analyzer {
 	return []*analysis.Analyzer{
 		cerrl.Analyzer(),
