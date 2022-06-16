@@ -9,7 +9,7 @@ linters:
   disable-all: true
   enable:
     - cerrl
-    - lll # as minimum on of the built-in linters is required
+    - bodyclose
 
 issues:
   # Excluding configuration per-path, per-linter, per-text and per-source

@@ -21,3 +21,6 @@ lint-no-plugin:
 
 lint-plugin-only:
 	golangci-lint run -v --timeout 10m -c config/.golangci-plugin-only.yml
+
+lint-docker:
+	docker-compose -f docker/docker-compose-lint.yaml up
