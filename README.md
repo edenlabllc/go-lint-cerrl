@@ -138,7 +138,7 @@ and build the plugin inside the container. You can see an example of
 Unfortunately we can't use the original `golangci-lint` github [action](https://github.com/golangci/golangci-lint-action)
 because of [CGO_ENABLED=0](#installation). We have to install the plugin and `golangci-lint`
 by our own during the github action and then run the linter. See an example of such
-action inside our [repo](.github/workflows/test.yaml#l51). You can use this approach for the entire linting
+action inside our [repo](.github/workflows/test.yaml#l71). You can use this approach for the entire linting
 process or separate the linting into two jobs (as wee deed):
 - lint using config without plugins and use the original `golangci-lint` github action
 - lint using config with plugins only and use a custom action

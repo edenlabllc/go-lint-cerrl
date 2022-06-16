@@ -61,11 +61,36 @@ jobs:
           go install github.com/golangci/golangci-lint/cmd/golangci-lint@v1.45.0
       - name: Build plugin
         run: |
-          curl -L -o go-lint-cerrl.zip https://github.com/edenlabllc/go-lint-cerrl/archive/refs/heads/main.zip
-          unzip go-lint-cerrl.zip
-          rm go-lint-cerrl.zip
-          go build --buildmode plugin -o cerrl.so go-lint-cerrl-main/plugin/cerrl.go
-          rm -r go-lint-cerrl-main
+          go build --buildmode plugin -o cerrl.so plugin/cerrl.go
       - name: Run linter
         run: |
           golangci-lint run -v --out-format github-actions --config config/.golangci-plugin-only.yml
+#
+#  an examlpe for a remote repository
+#
+#  lint-plugin:
+#    strategy:
+#      matrix:
+#        go: [1.18.x]
+#        os: [ubuntu-latest]
+#    name: lint-plugin
+#    runs-on: ${{ matrix.os }}
+#    steps:
+#      - uses: actions/setup-go@v3
+#        with:
+#          go-version: ${{ matrix.go }}
+#      - uses: actions/checkout@v3
+#        name: Checkout code
+#      - name: Install golangci-lint
+#        run: |
+#          go install github.com/golangci/golangci-lint/cmd/golangci-lint@v1.45.0
+#      - name: Build plugin
+#        run: |
+#          curl -L -o go-lint-cerrl.zip https://github.com/edenlabllc/go-lint-cerrl/archive/refs/tags/v0.1.0.zip
+#          unzip go-lint-cerrl.zip
+#          rm go-lint-cerrl.zip
+#          go build --buildmode plugin -o cerrl.so go-lint-cerrl-0.1.0/plugin/cerrl.go
+#          rm -r go-lint-cerrl-0.1.0
+#      - name: Run linter
+#        run: |
+#          golangci-lint run -v --out-format github-actions --config config/.golangci-plugin-only.yml
