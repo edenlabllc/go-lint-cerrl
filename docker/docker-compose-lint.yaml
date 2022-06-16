@@ -6,4 +6,4 @@ services:
     container_name: golangci-lint-docker-compose
     volumes:
       - ..:/app
-    command: sh /app/docker/docker-compose-lint.sh
+    command: bash /app/docker/docker-compose-lint.sh
