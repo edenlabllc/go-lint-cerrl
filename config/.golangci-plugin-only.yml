@@ -9,7 +9,7 @@ linters:
   disable-all: true
   enable:
     - cerrl
-    - bodyclose
+    - bodyclose # at least one default linter is required to avoid golangci-lint crash
 
 issues:
   # Excluding configuration per-path, per-linter, per-text and per-source
