@@ -115,7 +115,7 @@ For example for `vscode` add the following lines to `settings.json`:
 ```
 "go.lintFlags": [
     "-c",
-    ".golangci-no-plugin.yml",
+    "/path/to/.golangci-no-plugin.yml",
 ]
 ```
 
