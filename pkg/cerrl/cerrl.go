@@ -21,15 +21,15 @@ func Analyzer() *analysis.Analyzer {
 	}
 }
 
-// inspected call expression nodes will be saved here
-var visitedCallExprs = make(map[*ast.CallExpr]bool)
-
 // run lints a single package. Is run once per package rather than separately per each file
 func run(pass *analysis.Pass) (interface{}, error) {
 	i, ok := pass.ResultOf[inspect.Analyzer].(*inspector.Inspector)
 	if !ok {
 		return nil, fmt.Errorf("pass.ResultOf doesn't contain inspect.Analyzer")
 	}
+
+	// inspected call expression nodes will be saved here
+	visitedCallExprs := make(map[*ast.CallExpr]bool)
 
 	nodeFilter := []ast.Node{
 		(*ast.ImportSpec)(nil),
@@ -93,7 +93,7 @@ func run(pass *analysis.Pass) (interface{}, error) {
 		}
 
 		// inspect that the call expression includes a cerror.New... call
-		_, ok = isCallExprWithNewCall(ce, cerrPkgName)
+		_, ok = isCallExprWithNewCall(ce, cerrPkgName, visitedCallExprs)
 		if !ok {
 			return
 		}
@@ -112,7 +112,7 @@ func run(pass *analysis.Pass) (interface{}, error) {
 // or is a chain of calls where one of them is the cerror.New* call
 // if the cerror.New call is found, its node will be returned from the func
 // otherwise return nil, false
-func isCallExprWithNewCall(ce *ast.CallExpr, cerrPkgName string) (*ast.CallExpr, bool) {
+func isCallExprWithNewCall(ce *ast.CallExpr, cerrPkgName string, visitedCallExprs map[*ast.CallExpr]bool) (*ast.CallExpr, bool) {
 	visitedCallExprs[ce] = true
 
 	// check if the call expression is a direct cerror.New call
@@ -132,7 +132,7 @@ func isCallExprWithNewCall(ce *ast.CallExpr, cerrPkgName string) (*ast.CallExpr,
 	}
 
 	// check if the nested call expression is a cerror.New call
-	return isCallExprWithNewCall(nestedCe, cerrPkgName)
+	return isCallExprWithNewCall(nestedCe, cerrPkgName, visitedCallExprs)
 }
 
 // isLogCall checks if a given call expression is a direct Log call

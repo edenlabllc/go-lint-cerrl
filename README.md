@@ -146,7 +146,7 @@ process or separate the linting into two jobs (as wee deed):
 #### Known issues
 
 If you want to use only plugins in your `.golangci.yml` config you'll need
-to add some default linters too because `golangci-lint` may crash otherwise.
+to add at least one default linter (e.g. `bodyclose`) too because `golangci-lint` crashes otherwise.
 
 ### Use as a standalone
 
