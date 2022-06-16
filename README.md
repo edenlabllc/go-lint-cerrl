@@ -143,6 +143,11 @@ process or separate the linting into two jobs (as wee deed):
 - lint using config without plugins and use the original `golangci-lint` github action
 - lint using config with plugins only and use a custom action
 
+#### Known issues
+
+If you want to use only plugins in your `.golangci.yml` config you'll need
+to add some default linters too because `golangci-lint` may crash otherwise.
+
 ### Use as a standalone
 
 Rememeber that `nolint` directives won't work outside the `golangci-lint`.
