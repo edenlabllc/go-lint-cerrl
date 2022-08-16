@@ -9,6 +9,7 @@ import (
 )
 
 // AnalyzerPlugin is a required global variable for golangci-lint plugins
+//
 //nolint:deadcode
 var AnalyzerPlugin analyzerPlugin
 
