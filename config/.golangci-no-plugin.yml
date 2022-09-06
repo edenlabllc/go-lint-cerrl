@@ -28,9 +28,9 @@ linters-settings:
     enabled-tags:
       - diagnostic
       - experimental
-      - opinionated
+#      - opinionated # Uncomment after updating to go-critic v0.6.5
       - performance
-      - style
+#      - style # Uncomment after updating to go-critic v0.6.5
     disabled-checks:
       - dupImport # https://github.com/go-critic/go-critic/issues/845
       - ifElseChain
@@ -129,7 +129,6 @@ linters:
   disable-all: true
   enable:
     - bodyclose
-    - deadcode
     - depguard
     - dogsled
     - dupl
@@ -159,7 +158,6 @@ linters:
     - unconvert
     - unparam
     - unused
-    - varcheck
     - whitespace
     - asciicheck
     - exhaustive
@@ -187,3 +185,6 @@ issues:
     - linters:
         - gocritic
       text: "unnecessaryDefer:"
+run:
+  timeout: 10m
+  go: '1.19'

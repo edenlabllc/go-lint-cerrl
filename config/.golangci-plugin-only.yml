@@ -17,3 +17,7 @@ issues:
     - path: _test\.go
       linters:
         - cerrl
+
+run:
+  timeout: 10m
+  go: '1.19'

@@ -41,8 +41,8 @@ jobs:
       - name: golangci-lint
         uses: golangci/golangci-lint-action@v2
         with:
-          version: v1.48.0
-          args: -v --timeout 10m --config config/.golangci-no-plugin.yml
+          version: v1.49.0
+          args: -v --config config/.golangci-no-plugin.yml
   lint-plugin:
     strategy:
       matrix:
@@ -58,13 +58,13 @@ jobs:
         name: Checkout code
       - name: Install golangci-lint
         run: |
-          go install github.com/golangci/golangci-lint/cmd/golangci-lint@v1.48.0
+          go install github.com/golangci/golangci-lint/cmd/golangci-lint@v1.49.0
       - name: Build plugin
         run: |
           go build --buildmode plugin -o cerrl.so plugin/cerrl.go
       - name: Run linter
         run: |
-          golangci-lint run -v --timeout 10m --out-format github-actions --config config/.golangci-plugin-only.yml
+          golangci-lint run -v --out-format github-actions --config config/.golangci-plugin-only.yml
 #
 #  an examlpe for a remote repository
 #
