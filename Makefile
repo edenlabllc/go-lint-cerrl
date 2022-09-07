@@ -14,13 +14,13 @@ test:
 	go test -v ./...
 
 lint:
-	golangci-lint run -v --timeout 10m -c config/.golangci.yml
+	golangci-lint run -v -c config/.golangci.yml
 
 lint-no-plugin:
-	golangci-lint run -v --timeout 10m -c config/.golangci-no-plugin.yml
+	golangci-lint run -v -c config/.golangci-no-plugin.yml
 
 lint-plugin-only:
-	golangci-lint run -v --timeout 10m -c config/.golangci-plugin-only.yml
+	golangci-lint run -v -c config/.golangci-plugin-only.yml
 
 lint-docker:
 	docker-compose -f docker/docker-compose-lint.yaml up
