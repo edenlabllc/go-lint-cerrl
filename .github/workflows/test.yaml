@@ -39,9 +39,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
       - name: golangci-lint
-        uses: golangci/golangci-lint-action@v2
+        uses: golangci/golangci-lint-action@v3
         with:
-          version: v1.49.0
+          version: v1.50.1
           args: -v --config config/.golangci-no-plugin.yml
   lint-plugin:
     strategy:
@@ -58,7 +58,7 @@ jobs:
         name: Checkout code
       - name: Install golangci-lint
         run: |
-          go install github.com/golangci/golangci-lint/cmd/golangci-lint@v1.49.0
+          go install github.com/golangci/golangci-lint/cmd/golangci-lint@v1.50.1
       - name: Build plugin
         run: |
           go build --buildmode plugin -o cerrl.so plugin/cerrl.go
