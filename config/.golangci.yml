@@ -32,9 +32,9 @@ linters-settings:
     enabled-tags:
       - diagnostic
       - experimental
-#      - opinionated # Uncomment after updating to go-critic v0.6.5
+      - opinionated
       - performance
-#      - style # Uncomment after updating to go-critic v0.6.5
+      - style
     disabled-checks:
       - dupImport # https://github.com/go-critic/go-critic/issues/845
       - ifElseChain
