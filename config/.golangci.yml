@@ -122,6 +122,18 @@ linters-settings:
     # in the sense that it will only allow these assignments to be cuddled with variables being appended.
     # Default: true
     strict-append: false
+  depguard:
+    rules:
+      prevent_unmaintained_packages:
+        list-mode: lax
+        files:
+          - $all
+          - "!$test"
+        allow:
+          - $gostd
+        deny:
+          - pkg: io/ioutil
+            desc: "replaced by io and os packages since Go 1.16: https://tip.golang.org/doc/go1.16#ioutil"
 
   nestif:
     # Minimal complexity of if statements to report.
@@ -194,4 +206,4 @@ issues:
 
 run:
   timeout: 10m
-  go: '1.20'
+  go: '1.22'

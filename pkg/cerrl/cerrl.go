@@ -50,6 +50,7 @@ func run(pass *analysis.Pass) (interface{}, error) {
 				isImportFinished = false
 				cerrPkgName = ""
 			}
+
 			if is.Path != nil && strings.HasSuffix(is.Path.Value, `/pkg/cerror"`) {
 				// is.Name == nil means the import has no alias
 				if is.Name == nil {
@@ -58,6 +59,7 @@ func run(pass *analysis.Pass) (interface{}, error) {
 					cerrPkgName = is.Name.Name
 				}
 			}
+
 			return
 		}
 
