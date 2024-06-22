@@ -2,7 +2,7 @@
 
 cd /app
 
-go install github.com/golangci/golangci-lint/cmd/golangci-lint@v1.51.1
+go install github.com/golangci/golangci-lint/cmd/golangci-lint@v1.59.1
 
 go build --buildmode plugin -o /tmp/cerrl.so plugin/cerrl.go
 
