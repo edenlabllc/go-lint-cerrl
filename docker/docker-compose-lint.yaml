@@ -2,7 +2,7 @@ version: '3.7'
 
 services:
   golangci-lint-docker-compose:
-    image: golang:1.22
+    image: golang:1.23
     container_name: golangci-lint-docker-compose
     volumes:
       - ..:/app
