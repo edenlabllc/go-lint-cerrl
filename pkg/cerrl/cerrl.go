@@ -12,6 +12,11 @@ import (
 	"golang.org/x/tools/go/ast/inspector"
 )
 
+var _cerrorPaths = []string{
+	`/pkg/cerror"`,
+	`/pkg/cerror/v*"`,
+}
+
 func Analyzer() *analysis.Analyzer {
 	return &analysis.Analyzer{
 		Name:     "cerrl",
@@ -36,9 +41,10 @@ func run(pass *analysis.Pass) (interface{}, error) {
 		(*ast.CallExpr)(nil),
 	}
 
-	var cerrPkgName string
-
-	var isImportFinished bool
+	var (
+		cerrPkgName      string
+		isImportFinished bool
+	)
 
 	// filtered ast nodes will be passed here recursively
 	i.Preorder(nodeFilter, func(node ast.Node) {
@@ -51,7 +57,7 @@ func run(pass *analysis.Pass) (interface{}, error) {
 				cerrPkgName = ""
 			}
 
-			if is.Path != nil && strings.HasSuffix(is.Path.Value, `/pkg/cerror"`) {
+			if is.Path != nil && isHasSuffix(is.Path.Value, _cerrorPaths) {
 				// is.Name == nil means the import has no alias
 				if is.Name == nil {
 					cerrPkgName = "cerror"
@@ -108,6 +114,16 @@ func run(pass *analysis.Pass) (interface{}, error) {
 	})
 
 	return nil, nil
+}
+
+func isHasSuffix(path string, list []string) bool {
+	for _, item := range list {
+		if strings.HasSuffix(path, item) {
+			return true
+		}
+	}
+
+	return false
 }
 
 // isCallExprWithNewCall checks that a given call expression is a cerror.New* call
