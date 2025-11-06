@@ -52,7 +52,7 @@ that breaks the go plugin system requirements `CGO_ENABLED=1`.
 So most likely you'll have to install `golangci-lint` from source:
 
 ```
-go install github.com/golangci/golangci-lint/cmd/golangci-lint@v1.45.0
+go install github.com/golangci/golangci-lint/cmd/golangci-lint@v1.64.8
 ```
 
 Before installation ensure that you have `CGO_ENABLED=1` locally:
@@ -104,7 +104,7 @@ which golangci-lint
 #should see golangci-lint not found. If no delete this copy too
 
 #install
-go install github.com/golangci/golangci-lint/cmd/golangci-lint@v1.45.0
+go install github.com/golangci/golangci-lint/cmd/golangci-lint@v1.64.8
 ```
 
 If some of your teammate haven't manage to install the plugin you can keep
