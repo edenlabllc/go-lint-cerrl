@@ -40,8 +40,11 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+      - name: Go version
+        run: |
+          go version
       - name: golangci-lint
-        uses: golangci/golangci-lint-action@v6.1.1
+        uses: golangci/golangci-lint-action@v6.5.2
         with:
           version: v1.64.8
           args: -v --config config/.golangci-no-plugin.yml
