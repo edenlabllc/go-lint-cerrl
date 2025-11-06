@@ -3,22 +3,13 @@
 package main
 
 import (
-	"golang.org/x/tools/go/analysis"
-
 	"github.com/edenlabllc/go-lint-cerrl/pkg/cerrl"
+	"golang.org/x/tools/go/analysis"
 )
 
-// AnalyzerPlugin is a required global variable for golangci-lint plugins
-//
-//nolint:deadcode
-var AnalyzerPlugin analyzerPlugin
-
-type analyzerPlugin struct{}
-
-// GetAnalyzers returns a list of implemented analyzers.
-// Implements an interface required for golangci-lint plugins.
-func (*analyzerPlugin) GetAnalyzers() []*analysis.Analyzer {
+//nolint:unparam
+func New(_ any) ([]*analysis.Analyzer, error) {
 	return []*analysis.Analyzer{
 		cerrl.Analyzer(),
-	}
+	}, nil
 }
